@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "baseUrl": ".",
+    "paths": {
+      "tyfsm": ["./src/index.ts"],
+      "tyfsm/*": ["./src/*.ts"]
+    }
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
