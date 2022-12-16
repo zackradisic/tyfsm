@@ -1,11 +1,15 @@
 {
   "name": "tyfsm",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "files": [
+    "**"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -29,10 +33,10 @@
   },
   "scripts": {
     "prebuild": "shx rm -rf dist",
-    "build": "concurrently -m 8 'pnpm:build:*'",
+    "build": "concurrently -m 8 'yarn:build:*'",
     "build:base": "rollup -c",
     "build:vanilla": "rollup -c --config-vanilla",
-    "postbuild": "pnpm copy && pnpm patch-esm-ts",
+    "postbuild": "yarn copy && yarn patch-esm-ts && mkdir lol",
     "prettier": "prettier \"*.{js,json,md}\" \"{examples,src,tests,docs}/**/*.{js,jsx,ts,tsx,md,mdx}\" --write",
     "prettier:ci": "prettier '*.{js,json,md}' '{examples,src,tests,docs}/**/*.{js,jsx,ts,tsx,md,mdx}' --list-different",
     "eslint": "eslint --fix '*.{js,json}' '{src,tests}/**/*.{ts,tsx}'",
@@ -90,7 +94,7 @@
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "shx": "^0.3.4",
-    "typescript": "^4.9.3"
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "use-sync-external-store": "^1.2.0"

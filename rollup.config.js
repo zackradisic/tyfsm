@@ -165,7 +165,9 @@ module.exports = function (args) {
     c = "index";
   }
   return [
-    ...(c === "index" ? [createDeclarationConfig(`src/${c}.ts`, "dist")] : []),
+    ...(c === "index"
+      ? [createDeclarationConfig(`src/${c}.ts`, "dist/src")]
+      : []),
     createCommonJSConfig(`src/${c}.ts`, `dist/${c}`),
     createESMConfig(`src/${c}.ts`, `dist/esm/${c}.js`),
     createESMConfig(`src/${c}.ts`, `dist/esm/${c}.mjs`),

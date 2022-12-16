@@ -39,9 +39,9 @@ type Actions = {
   // the machine into the `connecting` state
   connect: (state: State<"idle">) => State<"connecting">;
 
-  // This action can only be called in the `connected` state and transitions
+  // This action can only be called in the `connecting` or `connected` state and transitions
   // the machine into the `idle` state
-  disconnect: (state: State<"connected">) => State<"idle">;
+  disconnect: (state: State<"connecting" | "connected">) => State<"idle">;
 };
 
 // Create the initial state
@@ -91,9 +91,10 @@ export const useWebsocketStore = create<WebsocketMachine, Actions>(
         addr: idleState.addr,
       });
     },
-    disconnect(connectedState) {
-      return transition(connectedState.kind, "idle", {
-        addr: connectedState.addr,
+    disconnect(state) {
+      state.socket.close();
+      return transition(state.kind, "idle", {
+        addr: state.addr,
       });
     },
   })

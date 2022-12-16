@@ -16,9 +16,10 @@ export type UseStore<machineStoreApi extends MachineStoreApi<any, any>> =
 
 export type UseBoundStore<
   MachineDef extends StateMachineDef<any, any>,
+  Actions,
   machineStoreApi extends MachineStoreApi<any, any> = MachineStoreApi<
     MachineDef,
-    MachineDataTransitionFns<MachineData<MachineDef>>
+    Actions
   >
 > = UseStore<machineStoreApi> & machineStoreApi;
 
@@ -46,14 +47,14 @@ const create = <
 >(
   initial: MachineDef["states"][keyof MachineDef["states"]],
   createMachineData: CreateMachineData<MachineDef, Actions>
-): UseBoundStore<MachineDef> => {
+): UseBoundStore<MachineDef, Actions> => {
   const api = createMachineStore(initial, createMachineData);
 
   const useBoundStore = () => useStore(api);
 
   Object.assign(useBoundStore, api);
 
-  return useBoundStore as UseBoundStore<MachineDef>;
+  return useBoundStore as UseBoundStore<MachineDef, Actions>;
 };
 
 export default create;
